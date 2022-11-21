@@ -28,19 +28,21 @@ int main (int argc, char **argv)
 	game.h = 0;
 	game.w = 0;
 	game.map_fd = open(argv[1], O_RDONLY);
-	
-	get_window_size(&game.w, &game.h, argv[1]);
-	game.mlx = mlx_init();
-	game.win = mlx_new_window(game.mlx, (32 * game.w), (32 * game.h), "window");
-	game.map_fd = open("./maps", O_RDONLY);
-	while (1)
+
+	if (check_map(argv[1]))
 	{
-		game.line = get_next_line(game.map_fd);
-		if (!game.line)
-			break;
-		put_line_to_window(game.mlx, game.win, game.line);
-		free(game.line);
+		get_window_size(&game.w, &game.h, argv[1]);
+		game.mlx = mlx_init();
+		game.win = mlx_new_window(game.mlx, (32 * game.w), (32 * game.h), "window");
+		game.map_fd = open("./maps", O_RDONLY);
+		while (1)
+		{
+			game.line = get_next_line(game.map_fd);
+			if (!game.line)
+				break;
+			put_line_to_window(game.mlx, game.win, game.line);
+			free(game.line);
+		}
+		mlx_loop(game.mlx);
 	}
-	mlx_hook(game.win, 8, 1L<<0, close, &game);
-	mlx_loop(game.mlx);
 }

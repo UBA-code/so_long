@@ -1,5 +1,5 @@
 SRCS = game.c put_line_to_window.c ./1337_get_next_line/get_next_line_utils.c ./1337_get_next_line/get_next_line.c \
-		./srcs/game_utils.c
+		./srcs/game_utils.c ./srcs/check_map.c
 # CFLAGS = -Wall -Wextra -Werror
 OBGS = $(SRCS:.c=.o)
 NAME = so_long
