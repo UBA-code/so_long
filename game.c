@@ -53,6 +53,7 @@ int main (int argc, char **argv)
 	game.mlx = mlx_init();
 	game.win = get_window_size(game.mlx, argv[1]);
 	game.map = get_map(argv[1]);
+	game.finished = 0;
 	render_map(&game);
 	mlx_key_hook(game.win, key_hook, &game);
 	mlx_loop(game.mlx);

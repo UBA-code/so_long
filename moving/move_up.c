@@ -6,11 +6,51 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:46:35 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/22 22:10:27 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/23 00:08:53 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+
+int coins_search(t_game game)
+{
+	int y;
+	int x;
+
+	y = -1;
+	while (game.map[++y])
+	{
+		x = -1;
+		while (game.map[y][++x])
+			if (game.map[y][x] == 'C')
+				return (1);
+	}
+	y = -1;
+	return (0);
+}
+
+void check_position(t_game game, int y_move, int x_move, int y, int x)
+{
+	if (!coins_search(game))
+		game.finished = 1;
+	if (game.finished && game.map[y - y_move][x - x_move] == 'E')
+	{
+		game.map[y][x] = '0';
+		game.map[y - y_move][x - x_move] = 'P';
+		mlx_clear_window(game.mlx, game.win);
+		render_map(&game);
+		free(game.map);
+		mlx_clear_window(game.mlx, game.win);
+		exit(0);
+	}
+	else if (game.map[y - y_move][x - x_move] != '1' && game.map[y - y_move][x - x_move] != 'E')
+	{
+		game.map[y][x] = '0';
+		game.map[y - y_move][x - x_move] = 'P';
+		mlx_clear_window(game.mlx, game.win);
+		render_map(&game);
+	}
+}
 
 void player_move(t_game game, int y_move, int x_move)
 {
@@ -25,94 +65,9 @@ void player_move(t_game game, int y_move, int x_move)
 		{
 			if (game.map[y][x] == 'P')
 			{
-				if (game.map[++y - y_move - 1][x - x_move] != '1')
-				{
-					game.map[y - 1][x] = '0';
-					game.map[y - y_move - 1][x - x_move] = 'P';
-					mlx_clear_window(game.mlx, game.win);
-					render_map(&game);
-				}
-				break;
+				check_position(game, y_move, x_move, y, x);
+				return;
 			}
 		}
 	}
 }
-/*
-void move_down(t_game game)
-{
-	int x;
-	int y;
-
-	y = -1;
-	while (game.map[++y])
-	{
-		x = -1;
-		while (game.map[y][++x])
-		{
-			if (game.map[y][x] == 'P')
-			{
-				if (game.map[++y][x] != '1')
-				{
-					game.map[y - 1][x] = '0';
-					game.map[y][x] = 'P';
-					mlx_clear_window(game.mlx, game.win);
-					render_map(&game);
-				}
-				break;
-			}
-		}
-	}
-}
-
-void move_left(t_game game)
-{
-	int x;
-	int y;
-
-	y = -1;
-	while (game.map[++y])
-	{
-		x = -1;
-		while (game.map[y][++x])
-		{
-			if (game.map[y][x] == 'P')
-			{
-				if (game.map[y][x - 1] != '1')
-				{
-					game.map[y][x] = '0';
-					game.map[y][x - 1] = 'P';
-					mlx_clear_window(game.mlx, game.win);
-					render_map(&game);
-				}
-				break;
-			}
-		}
-	}
-}
-
-void move_right(t_game game)
-{
-	int x;
-	int y;
-
-	y = -1;
-	while (game.map[++y])
-	{
-		x = -1;
-		while (game.map[y][++x])
-		{
-			if (game.map[y][x] == 'P')
-			{
-				if (game.map[y][x + 1] != '1')
-				{
-					game.map[y][x] = '0';
-					game.map[y][x + 1] = 'P';
-					mlx_clear_window(game.mlx, game.win);
-					render_map(&game);
-				}
-				break;
-			}
-		}
-	}
-}
-*/

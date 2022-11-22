@@ -6,7 +6,7 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 20:46:28 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/22 21:58:27 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/23 00:09:20 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_game
 	void *win;
 	void *img;
 	char **map;
+	int finished;
 } t_game;
 
 void put_line_to_window(t_game *game, char *line, int *x);
