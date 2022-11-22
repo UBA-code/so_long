@@ -6,13 +6,13 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:46:35 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/22 21:55:29 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/22 22:10:27 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void move_up(t_game game)
+void player_move(t_game game, int y_move, int x_move)
 {
 	int x;
 	int y;
@@ -25,10 +25,10 @@ void move_up(t_game game)
 		{
 			if (game.map[y][x] == 'P')
 			{
-				if (game.map[y - 1][x] != '1')
+				if (game.map[++y - y_move - 1][x - x_move] != '1')
 				{
-					game.map[y][x] = '0';
-					game.map[y - 1][x] = 'P';
+					game.map[y - 1][x] = '0';
+					game.map[y - y_move - 1][x - x_move] = 'P';
 					mlx_clear_window(game.mlx, game.win);
 					render_map(&game);
 				}
@@ -37,7 +37,7 @@ void move_up(t_game game)
 		}
 	}
 }
-
+/*
 void move_down(t_game game)
 {
 	int x;
@@ -115,3 +115,4 @@ void move_right(t_game game)
 		}
 	}
 }
+*/

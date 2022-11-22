@@ -6,7 +6,7 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 20:46:28 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/22 17:06:40 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/22 21:58:27 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,10 @@ int check_map(char *file);
 char **get_map(char *file);
 void render_map(t_game *game);
 void	ft_swap(char *a, char *b);
-void move_up(t_game game);
-void move_down(t_game game);
-void move_left(t_game game);
-void move_right(t_game game);
+void player_move(t_game game, int y_move, int x_move);
+// void move_up(t_game game);
+// void move_down(t_game game);
+// void move_left(t_game game);
+// void move_right(t_game game);
 
 #endif

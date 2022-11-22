@@ -30,14 +30,14 @@ void *get_window_size(void *mlx, char *path)
 
 int	key_hook(int keycode, t_game *game)
 {
-	if (keycode == 1 || keycode == 125)
-		move_down(*game);
 	if (keycode == 13 || keycode == 126)
-		move_up(*game);
+		player_move(*game, 1, 0);
+	if (keycode == 1 || keycode == 125)
+		player_move(*game, -1, 0);
 	if (keycode == 0 || keycode == 123)
-		move_left(*game);
+		player_move(*game, 0, 1);
 	if (keycode == 2 || keycode == 124)
-		move_right(*game);
+		player_move(*game, 0, -1);
 	if (keycode == 53)
 	{
 		free(game->map);
