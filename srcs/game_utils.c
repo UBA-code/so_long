@@ -6,7 +6,7 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 20:56:27 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/21 02:29:01 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/22 15:30:11 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,13 @@ void init_path_struct(t_elements *elements)
 	elements->coin_path = "./items/coin.xpm";
 	elements->exit_path = "./items/door.xpm";
 	elements->floor_path = "./items/floor.xpm";
+}
+
+void	ft_swap(char *a, char *b)
+{
+	char temp;
+
+	temp = *a;
+	*a = *b;
+	*b = temp;
 }
