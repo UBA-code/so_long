@@ -6,7 +6,7 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 20:46:28 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/23 00:09:20 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/23 23:39:36 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ typedef struct s_game
 	void *win;
 	void *img;
 	char **map;
-	int finished;
 } t_game;
 
 void put_line_to_window(t_game *game, char *line, int *x);
@@ -67,6 +66,11 @@ char **get_map(char *file);
 void render_map(t_game *game);
 void	ft_swap(char *a, char *b);
 void player_move(t_game game, int y_move, int x_move);
+void ft_putchar(char c);
+void ft_putstr(char *str);
+void	ft_putnbr(int n);
+int check_file(char *str);
+
 // void move_up(t_game game);
 // void move_down(t_game game);
 // void move_left(t_game game);
