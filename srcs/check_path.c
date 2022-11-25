@@ -32,36 +32,35 @@ void set_postion(char **map, int y, int x, int old_y, int old_x)
 	map[y][x] = 'P';
 }
 
-typedef struct s_utils
+int check_move(char **map, int y, int x)
 {
-	int y;
-	int x;
-	int old_y;
-	int old_x;
-} utils;
+	if (map[y] && map[y][x] != 'x' && map[y][x] != '1')
+		return (1);
+	return (0);
+}
 
 void next_move(char **map, int y, int x)
 {
 	get_player_position(map, &y, &x);
-	if (map[y][x + 1] != 'x' && map[y][x + 1] != '1')
+	if (check_move(map, y , x + 1))
 	{
 		set_postion(map, y, x + 1, y, x);
 		next_move(map, y, x);
 		set_player(map, y, x, y, x + 1);
 	}
-	if (map[y][x - 1] != 'x' && map[y][x - 1] != '1')
+	if (check_move(map, y , x - 1))
 	{
 		set_postion(map, y, x - 1, y, x);
 		next_move(map, y, x);
 		set_player(map, y, x, y, x - 1);
 	}
-	if (map[y - 1] && (map[y - 1][x] != 'x' && map[y - 1][x] != '1'))
+	if (check_move(map, y - 1, x))
 	{
 		set_postion(map, y - 1, x, y, x);
 		next_move(map, y, x);
 		set_player(map, y, x, y - 1, x);
 	}
-	if (map[y + 1] && (map[y + 1][x] != 'x' && map[y + 1][x] != '1'))
+	if (check_move(map, y + 1, x))
 	{
 		set_postion(map, y + 1, x, y, x);
 		next_move(map, y, x);
