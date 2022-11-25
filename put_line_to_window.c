@@ -6,7 +6,7 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 21:00:14 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/23 00:09:36 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/24 21:09:26 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,22 @@ void check_and_put(t_game *game, char *path, t_put_line_to_window_utils *utils, 
 
 void put_line_to_window(t_game *game, char *line, int *x)
 {
-	t_elements elements;
 	t_put_line_to_window_utils utils;
-
-	init_path_struct(&elements);
 	utils.i = -1;
 	utils.width = 0;
 	utils.y = 0;
 	while (line[++utils.i])
 	{
 		if (line[utils.i] == '0')
-			check_and_put(game, elements.floor_path, &utils, *x);
+			check_and_put(game, FLOOR, &utils, *x);
 		else if (line[utils.i] == '1')
-			check_and_put(game, elements.wall_path, &utils, *x);
+			check_and_put(game, WALL, &utils, *x);
 		else if (line[utils.i] == 'C')
-			check_and_put(game, elements.coin_path, &utils, *x);
+			check_and_put(game, COIN, &utils, *x);
 		else if (line[utils.i] == 'E')
-			check_and_put(game, elements.exit_path, &utils, *x);
+			check_and_put(game, DOOR, &utils, *x);
 		else if (line[utils.i] == 'P')
-			check_and_put(game, elements.player_path, &utils, *x);
+			check_and_put(game, PLAYER, &utils, *x);
 		utils.y += utils.width;
 	}
 	*x += utils.height;

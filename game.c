@@ -40,9 +40,18 @@ int	key_hook(int keycode, t_game *game)
 		player_move(*game, 0, -1);
 	if (keycode == 53)
 	{
+		close_message();
 		free(game->map);
 		exit(1);
 	}
+	return (0);
+}
+
+int close_win(t_game *game)
+{
+	close_message();
+	free(game->map);
+	exit(1);
 	return (0);
 }
 
@@ -50,10 +59,17 @@ int main (int argc, char **argv)
 {
 	t_game game;
 
+	if (!check_file(argv[1]))
+		return (ft_error("Please check if the extension of file is .ber\n"));
+	game.map = get_map(argv[1]);
+	if (!check_map(game))
+		return (invalid_message());
+	if (!check_path(argv[1]))
+		return (0);
 	game.mlx = mlx_init();
 	game.win = get_window_size(game.mlx, argv[1]);
-	game.map = get_map(argv[1]);
 	render_map(&game);
-	mlx_key_hook(game.win, key_hook, &game);
+	mlx_hook(game.win, 2, 0, key_hook, &game);
+	mlx_hook(game.win, 17, 0, close_win, &game);
 	mlx_loop(game.mlx);
 }

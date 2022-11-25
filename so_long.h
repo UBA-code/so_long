@@ -6,7 +6,7 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 20:46:28 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/23 23:39:36 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/25 13:37:57 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,14 @@
 # include "stdio.h"
 # include "./1337_get_next_line/get_next_line.h"
 
+#define FLOOR "./items/floor.xpm"
+#define DOOR_CLOSE "./items/door.xpm"
+#define DOOR_OPEN "./items/door_open.xpm"
+#define DOOR DOOR_CLOSE
+#define COIN "./items/coin.xpm"
+#define PLAYER "./items/player.xpm"
+#define WALL "./items/wall.xpm"
 
-
-
-typedef struct s_elements
-{
-	char *player_path;
-	char *wall_path;
-	char *exit_path;
-	char *coin_path;
-	char *floor_path;
-
-} t_elements;
 
 typedef struct s_game_main_utils
 {
@@ -56,12 +52,12 @@ typedef struct s_game
 	void *win;
 	void *img;
 	char **map;
+	char *exit;
 } t_game;
 
 void put_line_to_window(t_game *game, char *line, int *x);
 char *ft_strdup(char *str);
-void init_path_struct(t_elements *elements);
-int check_map(char *file);
+int check_map(t_game game);
 char **get_map(char *file);
 void render_map(t_game *game);
 void	ft_swap(char *a, char *b);
@@ -70,10 +66,13 @@ void ft_putchar(char c);
 void ft_putstr(char *str);
 void	ft_putnbr(int n);
 int check_file(char *str);
+int check_end_line(char **map);
+void	close_message(void);
+int	invalid_message(void);
+void	succes_message(void);
+int	ft_error(char *txt);
 
-// void move_up(t_game game);
-// void move_down(t_game game);
-// void move_left(t_game game);
-// void move_right(t_game game);
+int check_path(char *file);
+void get_player_position(char **map, int *y, int *x);
 
 #endif

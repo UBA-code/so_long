@@ -6,7 +6,7 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:46:35 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/23 23:31:26 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/25 00:38:10 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void check_position(t_game game, int y_move, int x_move, int y, int x)
 		game.map[y][x] = '0';
 		game.map[y - y_move][x - x_move] = 'P';
 		mlx_clear_window(game.mlx, game.win);
+		succes_message();
 		render_map(&game);
 		free(game.map);
 		mlx_clear_window(game.mlx, game.win);

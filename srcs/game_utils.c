@@ -6,20 +6,11 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 20:56:27 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/23 23:44:14 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/25 02:16:39 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-
-void init_path_struct(t_elements *elements)
-{
-	elements->wall_path = "./items/wall.xpm";
-	elements->player_path = "./items/player.xpm";
-	elements->coin_path = "./items/coin.xpm";
-	elements->exit_path = "./items/door.xpm";
-	elements->floor_path = "./items/floor.xpm";
-}
 
 void ft_putchar(char c)
 {
@@ -84,7 +75,7 @@ int check_file(char *str)
 	{
 		if (str[i] == '.')
 		{
-			if (!ft_strcmp(str + (i + 1), "ber"))
+			if (!ft_strcmp(str + (i), ".ber"))
 				return (1);
 			else
 				return (0);

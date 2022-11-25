@@ -6,104 +6,113 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 16:54:41 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/21 22:35:30 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/25 03:48:25 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int check_rectangular(char *file)
+int check_walls(char **map)
 {
-	int fd;
-	fd = open(file, O_RDONLY);
-	char *line;
-	int w;
-	int h;
+	int y;
+	int x;
+	int end;
 
-	line = get_next_line(fd);
-	w = get_str_len(line);
-	h = 0;
-	while (line)
+	y = 0;
+	x = 0;
+	end = 0;
+	while (map[y][end] && map[y][end] != '\n')
 	{
-		h++;
-		free(line);
-		line = get_next_line(fd);
-	}
-	close(fd);
-	free(line);
-	if (w <= h)
-		return (0);
-	else
-		return (1);
-}
-
-int check_elements(char *file)
-{
-	char *line;
-	int i;
-	int fd;
-
-	fd = open(file, O_RDONLY);
-	line = get_next_line(fd);
-	while (line)
-	{
-		i = -1;
-		while (line[++i])
-		{
-			if (line[i] != '0' && line[i] != '1' && line[i] != 'P'
-				&& line[i] != 'C' && line[i] != 'E' && line[i] != '\n')
-			{
-				free(line);
-				close(fd);
-				return (0);
-			}
-		}
-		free(line);
-		line = get_next_line(fd);
-	}
-	close(fd);
-	return (1);
-}
-
-int check_valid_end(char *file)
-{
-	int fd;
-	int w;
-	int w_temp;
-	char *line;
-
-	fd = open(file, O_RDONLY);
-	line = get_next_line(fd);
-	w = get_str_len(line);
-	w_temp = w;
-	while (line)
-	{
-		if (w_temp != w)
-		{
-			close(fd);
-			free(line);
+		if (map[y][end] != '1')
 			return (0);
-		}
-		w_temp = w;
-		free(line);
-		line = get_next_line(fd);
-		w = get_str_len(line);
-		if (line && line[w - 1] != '\n')
-			w++;
+		end++;
 	}
-	close(fd);
-	free(line);
+	while (map[y])
+	{
+		if (map[y][x] != '1' || map[y][end - 1] != '1')
+			return (0);
+		y++;
+	}
+	x = 0;
+	while (map[y - 1][x] && map[y - 1][x] != '\n')
+	{
+		if (map[y - 1][x] != '1')
+			return (0);
+		x++;
+	}
 	return (1);
 }
 
-int check_map(char *file)
+int check_valid_elements(char **map)
 {
-	int width;
-	int height;
-	char *line;
+	int y;
+	int x;
 
-	if (check_rectangular(file) && check_elements(file) && check_valid_end(file))
-		return (1);
-	else
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] != '0' && map[y][x] != 'C' && map[y][x] != 'E' && map[y][x] != 'P' && map[y][x] != '1' && map[y][x] != '\n')
+				return (0);
+			x++;
+		}
+		y++;
+	}
+	return (1);
+}
+
+int check_rectangular(char **map)
+{
+	int y;
+	int x;
+
+	y = 0;
+	x = 0;
+	while (map[y][x] && map[y][x] != '\n')
+		x++;
+	while (map[y])
+		y++;
+	if (y >= x)
 		return (0);
+	return (1);
+}
+
+int check_element(char **map)
+{
+	int y;
+	int x;
+	int exit;
+	int coin;
+	int player;
+
+	y = -1;
+	exit = 0;
+	coin = 0;
+	player = 0;
+	while (map[++y])
+	{
+		x = -1;
+		while (map[y][++x])
+		{
+			if (map[y][x] == 'E')
+				exit++;
+			if (map[y][x] == 'C')
+				coin++;
+			if (map[y][x] == 'P')
+				player++;
+		}
+	}
+	if (exit > 1 || player > 1 || coin == 0)
+		return (0);
+	return (1);
+}
+
+int check_map(t_game game)
+{
+	if (check_rectangular(game.map) && check_valid_elements(game.map) && check_walls(game.map)
+		&& check_element(game.map) && check_end_line(game.map))
+		return (1);
+	return (0);
 }
