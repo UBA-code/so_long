@@ -26,38 +26,39 @@ void set_player(char **map, int y, int x, int old_y, int old_x)
 	map[old_y][old_x] = 'x';
 }
 
-int next_move(char **map, int y, int x)
+void set_postion(char **map, int y, int x, int old_y, int old_x)
+{
+	map[old_y][old_x] = 'x';
+	map[y][x] = 'P';
+}
+
+void next_move(char **map, int y, int x)
 {
 	get_player_position(map, &y, &x);
 	if (map[y][x + 1] != 'x' && map[y][x + 1] != '1')
 	{
-		map[y][x] = 'x';
-		map[y][x + 1] = 'P';
+		set_postion(map, y, x + 1, y, x);
 		next_move(map, y, x);
 		set_player(map, y, x, y, x + 1);
 	}
 	if (map[y][x - 1] != 'x' && map[y][x - 1] != '1')
 	{
-		map[y][x] = 'x';
-		map[y][x - 1] = 'P';
+		set_postion(map, y, x - 1, y, x);
 		next_move(map, y, x);
 		set_player(map, y, x, y, x - 1);
 	}
 	if (map[y - 1] && (map[y - 1][x] != 'x' && map[y - 1][x] != '1'))
 	{
-		map[y][x] = 'x';
-		map[y - 1][x] = 'P';
+		set_postion(map, y - 1, x, y, x);
 		next_move(map, y, x);
 		set_player(map, y, x, y - 1, x);
 	}
 	if (map[y + 1] && (map[y + 1][x] != 'x' && map[y + 1][x] != '1'))
 	{
-		map[y][x] = 'x';
-		map[y + 1][x] = 'P';
+		set_postion(map, y + 1, x, y, x);
 		next_move(map, y, x);
 		set_player(map, y, x, y + 1, x);
 	}
-	return (0);
 }
 
 int check_path(char *file)
