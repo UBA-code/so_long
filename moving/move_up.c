@@ -6,7 +6,7 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:46:35 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/25 00:38:10 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/25 21:43:15 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,32 +29,46 @@ int coins_search(t_game game)
 	return (0);
 }
 
+void free_exit(t_game game, char c)
+{
+	mlx_clear_window(game.mlx, game.win);
+	if (c == 'S')
+		succes_message();
+	if (c == 'O')
+		over_message();
+	render_map(&game);
+	free(game.map);
+	mlx_clear_window(game.mlx, game.win);
+	exit(0);
+}
+
+void	ft_put_counter_win(t_game game, int i)
+{
+	mlx_string_put(game.mlx, game.win, 0, 0, 0x001958b9, "Number of moves is : ");
+	mlx_string_put(game.mlx, game.win, 220, 0, 0x001958b9, ft_itoa(i));
+}
+
 void check_position(t_game game, int y_move, int x_move, int y, int x)
 {
 	static int i;
 	if (!coins_search(game) && game.map[y - y_move][x - x_move] == 'E')
 	{
-		ft_putstr("number of moves is : ");
-		ft_putnbr(++i);
-		ft_putchar('\n');
 		game.map[y][x] = '0';
 		game.map[y - y_move][x - x_move] = 'P';
-		mlx_clear_window(game.mlx, game.win);
-		succes_message();
-		render_map(&game);
-		free(game.map);
-		mlx_clear_window(game.mlx, game.win);
-		exit(0);
+		ft_put_counter_win(game, ++i);
+		ft_putstr("ur movement count is : ");
+		ft_putnbr(i);
+		free_exit(game, 'S');
 	}
+	else if (game.map[y - y_move][x - x_move] == 'M')
+		free_exit(game, 'O');
 	else if (game.map[y - y_move][x - x_move] != '1' && game.map[y - y_move][x - x_move] != 'E')
 	{
-		ft_putstr("number of moves is : ");
-		ft_putnbr(++i);
-		ft_putchar('\n');
 		game.map[y][x] = '0';
 		game.map[y - y_move][x - x_move] = 'P';
 		mlx_clear_window(game.mlx, game.win);
 		render_map(&game);
+		ft_put_counter_win(game, ++i);
 	}
 }
 

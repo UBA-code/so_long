@@ -2,14 +2,14 @@ SRCS = game.c put_line_to_window.c ./1337_get_next_line/get_next_line_utils.c ./
 		./srcs/game_utils.c ./srcs/get_map.c ./srcs/render_map.c ./srcs/check_map.c ./srcs/check_map_two.c ./srcs/check_path.c \
 		./srcs/messages.c \
 		./moving/move_up.c
-# CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -lmlx -framework OpenGl -framework AppKit
 OBGS = $(SRCS:.c=.o)
 NAME = so_long
 
 all: $(NAME)
 
 $(NAME): $(OBGS)
-	$(CC) $(OBGS) -L /usr/local/lib/ -lmlx -framework OpenGl -framework AppKit
+	$(CC) -o $(NAME) $(CFLAGS) $(OBGS)
 
 clean:
 	rm -rf $(OBGS)

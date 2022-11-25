@@ -6,7 +6,7 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 20:46:28 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/25 15:31:53 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/25 22:36:57 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,6 @@
 #define PLAYER "./items/player.xpm"
 #define WALL "./items/wall.xpm"
 #define ENEMY "./items/enemy.xpm"
-
-
-typedef struct s_game_main_utils
-{
-	void *mlx;
-	void *win;
-	int map_fd;
-	char *line;
-	int w;
-	int h;
-} t_game_main_utils;
 
 typedef struct s_put_line_to_window_utils {
 	int i;
@@ -63,14 +52,12 @@ typedef struct s_utils
 	int x;
 	int old_y;
 	int old_x;
-} utils;
+} t_utils;
 
 void put_line_to_window(t_game *game, char *line, int *x);
-char *ft_strdup(char *str);
 int check_map(t_game game);
 char **get_map(char *file);
 void render_map(t_game *game);
-void	ft_swap(char *a, char *b);
 void player_move(t_game game, int y_move, int x_move);
 void ft_putchar(char c);
 void ft_putstr(char *str);
@@ -80,9 +67,11 @@ int check_end_line(char **map);
 void	close_message(void);
 int	invalid_message(void);
 void	succes_message(void);
+void	over_message(void);
 int	ft_error(char *txt);
-
+int ft_tabchr(char **map, char c);
 int check_path(char *file);
-void get_player_position(char **map, int *y, int *x);
+void get_player_position(char **map, t_utils *utils, char c);
+char	*ft_itoa(int n);
 
 #endif

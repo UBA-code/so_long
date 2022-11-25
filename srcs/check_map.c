@@ -6,7 +6,7 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 16:54:41 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/25 03:48:25 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/25 17:38:53 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int check_valid_elements(char **map)
 		x = 0;
 		while (map[y][x])
 		{
-			if (map[y][x] != '0' && map[y][x] != 'C' && map[y][x] != 'E' && map[y][x] != 'P' && map[y][x] != '1' && map[y][x] != '\n')
+			if (map[y][x] != '0' && map[y][x] != 'C' && map[y][x] != 'E'
+			&& map[y][x] != 'P' && map[y][x] != '1' && map[y][x] != '\n' && map[y][x] != 'M')
 				return (0);
 			x++;
 		}

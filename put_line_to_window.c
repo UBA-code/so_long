@@ -6,7 +6,7 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 21:00:14 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/24 21:09:26 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/25 17:38:06 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void put_line_to_window(t_game *game, char *line, int *x)
 			check_and_put(game, DOOR, &utils, *x);
 		else if (line[utils.i] == 'P')
 			check_and_put(game, PLAYER, &utils, *x);
+		else if (line[utils.i] == 'M')
+			check_and_put(game, ENEMY, &utils, *x);
 		utils.y += utils.width;
 	}
 	*x += utils.height;
