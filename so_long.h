@@ -6,7 +6,7 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 20:46:28 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/25 13:37:57 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/25 15:31:53 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 #define COIN "./items/coin.xpm"
 #define PLAYER "./items/player.xpm"
 #define WALL "./items/wall.xpm"
+#define ENEMY "./items/enemy.xpm"
 
 
 typedef struct s_game_main_utils
@@ -54,6 +55,15 @@ typedef struct s_game
 	char **map;
 	char *exit;
 } t_game;
+
+
+typedef struct s_utils
+{
+	int y;
+	int x;
+	int old_y;
+	int old_x;
+} utils;
 
 void put_line_to_window(t_game *game, char *line, int *x);
 char *ft_strdup(char *str);

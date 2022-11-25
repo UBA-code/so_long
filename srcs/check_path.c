@@ -32,6 +32,14 @@ void set_postion(char **map, int y, int x, int old_y, int old_x)
 	map[y][x] = 'P';
 }
 
+typedef struct s_utils
+{
+	int y;
+	int x;
+	int old_y;
+	int old_x;
+} utils;
+
 void next_move(char **map, int y, int x)
 {
 	get_player_position(map, &y, &x);
