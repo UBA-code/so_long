@@ -6,7 +6,7 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 22:37:27 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/25 21:36:02 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/25 23:52:42 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int check_end_line(char **map)
 	int width;
 
 	y = 0;
+	x = 0;
 	while (map[y][x] && map[y][x] != '\n')
 		x++;
 	width = x;

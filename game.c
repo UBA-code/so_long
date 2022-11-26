@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/26 15:43:50 by ybel-hac          #+#    #+#             */
+/*   Updated: 2022/11/26 20:12:37 by ybel-hac         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void *get_window_size(void *mlx, char *path)
@@ -28,16 +40,16 @@ void *get_window_size(void *mlx, char *path)
 	return (win);
 }
 
-int	key_hook(int keycode, t_game *game)
+int key_hook(int keycode, t_game *game)
 {
 	if (keycode == 13 || keycode == 126)
-		player_move(*game, 1, 0);
+		player_move(game, 1, 0, '0');
 	if (keycode == 1 || keycode == 125)
-		player_move(*game, -1, 0);
+		player_move(game, -1, 0, '0');
 	if (keycode == 0 || keycode == 123)
-		player_move(*game, 0, 1);
+		player_move(game, 0, 1, 'l');
 	if (keycode == 2 || keycode == 124)
-		player_move(*game, 0, -1);
+		player_move(game, 0, -1, 'r');
 	if (keycode == 53)
 	{
 		close_message();
@@ -55,12 +67,32 @@ int close_win(t_game *game)
 	return (0);
 }
 
-int main (int argc, char **argv)
+int render_next_frame(t_game *game)
+{
+	game->speed++;
+	if (game->speed >= 1000)
+	{
+		move_enemy(game);
+		if (!ft_strcmp(game->coin, COIN))
+			game->coin = COIN2;
+		else
+			game->coin = COIN;
+		render_map(game);
+		game->speed = 0;
+	}
+	check_player_exist(game->map);
+	return (0);
+}
+
+int main(int argc, char **argv)
 {
 	t_game game;
 
 	if (argc != 2)
 		return (0);
+	game.mlx = mlx_init();
+	if (!game.mlx)
+		return (ft_error("failed to initialize"));
 	if (!check_file(argv[1]))
 		return (ft_error("Please check if the extension of file is .ber\n"));
 	game.map = get_map(argv[1]);
@@ -68,11 +100,14 @@ int main (int argc, char **argv)
 		return (invalid_message());
 	if (!check_path(argv[1]))
 		return (0);
-	game.mlx = mlx_init();
+	game.exit = DOOR_CLOSE;
+	game.coin = COIN;
 	game.win = get_window_size(game.mlx, argv[1]);
+	game.player = PLAYER_RIGHT;
 	render_map(&game);
 	mlx_string_put(game.mlx, game.win, 0, 0, 0x001958b9, "Number of moves is : 0");
 	mlx_hook(game.win, 2, 0, key_hook, &game);
 	mlx_hook(game.win, 17, 0, close_win, &game);
+	mlx_loop_hook(game.mlx, render_next_frame, &game);
 	mlx_loop(game.mlx);
 }

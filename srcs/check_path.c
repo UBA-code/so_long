@@ -56,24 +56,42 @@ void next_move(char **map, t_utils utils)
 	}
 }
 
+void free_tab(char **tab)
+{
+	int y;
+
+	y = 0;
+	while (tab[y])
+	{
+		free(tab[y]);
+		y++;
+	}
+	free(tab);
+}
+
 int check_path(char *file)
 {
 	t_utils	utils;
 	char	**map;
 
 	map = get_map(file);
+	get_player_position(map, &utils, 'P');
 	next_move(map, utils);
 	get_player_position(map, &utils, 'E');
-		
-	if (ft_tabchr(map, 'E') || ft_tabchr(map, 'C'))
+	if (ft_tabchr(map, 'E'))
 	{
 		if (!(map[utils.y][utils.x - 1] == 'x' || map[utils.y][utils.x + 1] == 'x'
 			|| map[utils.y + 1][utils.x] == 'x' || map[utils.y - 1][utils.x] == 'x'))
 			{
-			free(map);
-			return (ft_error("Unvalid path\n"));
+				free_tab(map);
+				return (ft_error("Unvalid path\n"));
 			}
 	}
-	free(map);
+	if (ft_tabchr(map, 'C'))
+	{
+		free_tab(map);
+		return (ft_error("Unvalid path\n"));
+	}
+	free_tab(map);
 	return (1);
 }

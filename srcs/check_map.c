@@ -6,7 +6,7 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 16:54:41 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/25 17:38:53 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/26 20:44:26 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,9 @@ int check_element(char **map)
 	int player;
 
 	y = -1;
-	exit = 0;
+	exit = 1;
 	coin = 0;
-	player = 0;
+	player = 1;
 	while (map[++y])
 	{
 		x = -1;
@@ -105,7 +105,7 @@ int check_element(char **map)
 				player++;
 		}
 	}
-	if (exit > 1 || player > 1 || coin == 0)
+	if (exit != 2 || player != 2 || coin == 0)
 		return (0);
 	return (1);
 }

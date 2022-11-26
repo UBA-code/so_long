@@ -6,7 +6,7 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:46:35 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/25 21:43:15 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/26 20:11:06 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void free_exit(t_game game, char c)
 		succes_message();
 	if (c == 'O')
 		over_message();
-	render_map(&game);
 	free(game.map);
 	mlx_clear_window(game.mlx, game.win);
 	exit(0);
@@ -60,7 +59,7 @@ void check_position(t_game game, int y_move, int x_move, int y, int x)
 		ft_putnbr(i);
 		free_exit(game, 'S');
 	}
-	else if (game.map[y - y_move][x - x_move] == 'M')
+	else if (game.map[y - y_move][x - x_move] == 'M' || game.map[y - y_move][x - x_move] == 'm')
 		free_exit(game, 'O');
 	else if (game.map[y - y_move][x - x_move] != '1' && game.map[y - y_move][x - x_move] != 'E')
 	{
@@ -72,20 +71,24 @@ void check_position(t_game game, int y_move, int x_move, int y, int x)
 	}
 }
 
-void player_move(t_game game, int y_move, int x_move)
+void player_move(t_game *game, int y_move, int x_move, char c)
 {
 	int x;
 	int y;
 
 	y = 0;
-	while (game.map[++y])
+	if (c == 'r')
+		game->player = PLAYER_RIGHT;
+	else if (c == 'l')
+		game->player = PLAYER_LEFT;
+	while (*game->map[++y])
 	{
 		x = -1;
-		while (game.map[y][++x])
+		while ((*game).map[y][++x])
 		{
-			if (game.map[y][x] == 'P')
+			if ((*game).map[y][x] == 'P')
 			{
-				check_position(game, y_move, x_move, y, x);
+				check_position(*game, y_move, x_move, y, x);
 				return;
 			}
 		}

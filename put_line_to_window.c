@@ -6,7 +6,7 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 21:00:14 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/25 17:38:06 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/26 19:57:38 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@ void check_and_put(t_game *game, char *path, t_put_line_to_window_utils *utils, 
 	mlx_destroy_image(game->mlx, (*utils).img);
 }
 
+void check_player_exist(char **map)
+{
+	if (!ft_tabchr(map, 'P'))
+	{
+		free_tab(map);
+		over_message();
+		exit(1);
+	}
+}
+
 void put_line_to_window(t_game *game, char *line, int *x)
 {
 	t_put_line_to_window_utils utils;
@@ -35,12 +45,12 @@ void put_line_to_window(t_game *game, char *line, int *x)
 		else if (line[utils.i] == '1')
 			check_and_put(game, WALL, &utils, *x);
 		else if (line[utils.i] == 'C')
-			check_and_put(game, COIN, &utils, *x);
+			check_and_put(game, game->coin, &utils, *x);
 		else if (line[utils.i] == 'E')
-			check_and_put(game, DOOR, &utils, *x);
+			check_and_put(game, game->exit, &utils, *x);
 		else if (line[utils.i] == 'P')
-			check_and_put(game, PLAYER, &utils, *x);
-		else if (line[utils.i] == 'M')
+			check_and_put(game, game->player, &utils, *x);
+		else if (line[utils.i] == 'M' || line[utils.i] == 'm')
 			check_and_put(game, ENEMY, &utils, *x);
 		utils.y += utils.width;
 	}
