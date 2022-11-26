@@ -6,20 +6,21 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 15:43:50 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/26 20:12:37 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/26 22:19:48 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void *get_window_size(void *mlx, char *path)
+void	*get_window_size(void *mlx, char *path)
 {
-	int fd = open(path, O_RDONLY);
-	char *line;
-	void *win;
-	int w;
-	int h;
+	int		fd;
+	char	*line;
+	void	*win;
+	int		w;
+	int		h;
 
+	fd = open(path, O_RDONLY);
 	w = 0;
 	h = 0;
 	while (1)
@@ -30,7 +31,7 @@ void *get_window_size(void *mlx, char *path)
 		else
 		{
 			free(line);
-			break;
+			break ;
 		}
 		w = get_str_len(line);
 		free(line);
@@ -40,7 +41,7 @@ void *get_window_size(void *mlx, char *path)
 	return (win);
 }
 
-int key_hook(int keycode, t_game *game)
+int	key_hook(int keycode, t_game *game)
 {
 	if (keycode == 13 || keycode == 126)
 		player_move(game, 1, 0, '0');
@@ -59,7 +60,7 @@ int key_hook(int keycode, t_game *game)
 	return (0);
 }
 
-int close_win(t_game *game)
+int	close_win(t_game *game)
 {
 	close_message();
 	free(game->map);
@@ -67,7 +68,7 @@ int close_win(t_game *game)
 	return (0);
 }
 
-int render_next_frame(t_game *game)
+int	render_next_frame(t_game *game)
 {
 	game->speed++;
 	if (game->speed >= 1000)
@@ -84,9 +85,9 @@ int render_next_frame(t_game *game)
 	return (0);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_game game;
+	t_game	game;
 
 	if (argc != 2)
 		return (0);
@@ -105,7 +106,8 @@ int main(int argc, char **argv)
 	game.win = get_window_size(game.mlx, argv[1]);
 	game.player = PLAYER_RIGHT;
 	render_map(&game);
-	mlx_string_put(game.mlx, game.win, 0, 0, 0x001958b9, "Number of moves is : 0");
+	mlx_string_put(game.mlx, game.win, 0, 0,
+		0x001958b9, "Number of moves is : 0");
 	mlx_hook(game.win, 2, 0, key_hook, &game);
 	mlx_hook(game.win, 17, 0, close_win, &game);
 	mlx_loop_hook(game.mlx, render_next_frame, &game);

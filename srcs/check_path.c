@@ -1,18 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_path.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/23 11:25:55 by ybel-hac          #+#    #+#             */
+/*   Updated: 2022/11/26 21:59:31 by ybel-hac         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../so_long.h"
 
-void set_player(char **map, t_utils utils, int old_y, int old_x)
+void	set_player(char **map, t_utils utils, int old_y, int old_x)
 {
 	map[utils.y][utils.x] = 'P';
 	map[old_y][old_x] = 'x';
 }
 
-void set_postion(char **map, int y, int x, t_utils utils)
+void	set_postion(char **map, int y, int x, t_utils utils)
 {
 	map[utils.old_y][utils.old_x] = 'x';
 	map[y][x] = 'P';
 }
 
-int check_move(char **map, int y, int x)
+int	check_move(char **map, int y, int x)
 {
 	if (!ft_tabchr(map, 'C'))
 	{
@@ -27,16 +39,16 @@ int check_move(char **map, int y, int x)
 	return (0);
 }
 
-void next_move(char **map, t_utils utils)
+void	next_move(char **map, t_utils utils)
 {
 	get_player_position(map, &utils, 'P');
-	if (check_move(map, utils.y , utils.x + 1))
+	if (check_move(map, utils.y, utils.x + 1))
 	{
 		set_postion(map, utils.y, utils.x + 1, utils);
 		next_move(map, utils);
 		set_player(map, utils, utils.y, utils.x + 1);
 	}
-	if (check_move(map, utils.y , utils.x - 1))
+	if (check_move(map, utils.y, utils.x - 1))
 	{
 		set_postion(map, utils.y, utils.x - 1, utils);
 		next_move(map, utils);
@@ -56,20 +68,7 @@ void next_move(char **map, t_utils utils)
 	}
 }
 
-void free_tab(char **tab)
-{
-	int y;
-
-	y = 0;
-	while (tab[y])
-	{
-		free(tab[y]);
-		y++;
-	}
-	free(tab);
-}
-
-int check_path(char *file)
+int	check_path(char *file)
 {
 	t_utils	utils;
 	char	**map;
@@ -80,12 +79,14 @@ int check_path(char *file)
 	get_player_position(map, &utils, 'E');
 	if (ft_tabchr(map, 'E'))
 	{
-		if (!(map[utils.y][utils.x - 1] == 'x' || map[utils.y][utils.x + 1] == 'x'
-			|| map[utils.y + 1][utils.x] == 'x' || map[utils.y - 1][utils.x] == 'x'))
-			{
-				free_tab(map);
-				return (ft_error("Unvalid path\n"));
-			}
+		if (!(map[utils.y][utils.x - 1] == 'x'
+			|| map[utils.y][utils.x + 1] == 'x'
+			|| map[utils.y + 1][utils.x] == 'x'
+			|| map[utils.y - 1][utils.x] == 'x'))
+		{
+			free_tab(map);
+			return (ft_error("Unvalid path\n"));
+		}
 	}
 	if (ft_tabchr(map, 'C'))
 	{

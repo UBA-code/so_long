@@ -6,17 +6,17 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 22:37:27 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/25 23:52:42 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/26 21:41:01 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int check_end_line(char **map)
+int	check_end_line(char **map)
 {
-	int y;
-	int x;
-	int width;
+	int	y;
+	int	x;
+	int	width;
 
 	y = 0;
 	x = 0;
@@ -35,10 +35,10 @@ int check_end_line(char **map)
 	return (1);
 }
 
-void get_player_position(char **map, t_utils *utils, char c)
+void	get_player_position(char **map, t_utils *utils, char c)
 {
-	int y_func;
-	int x_func;
+	int	y_func;
+	int	x_func;
 
 	y_func = 0;
 	while (map[y_func])
@@ -60,10 +60,10 @@ void get_player_position(char **map, t_utils *utils, char c)
 	}
 }
 
-int ft_tabchr(char **map, char c)
+int	ft_tabchr(char **map, char c)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (map[y])

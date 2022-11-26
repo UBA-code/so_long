@@ -6,23 +6,24 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 21:00:14 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/26 19:57:38 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/26 22:19:05 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./so_long.h"
 
-
-
-void check_and_put(t_game *game, char *path, t_put_line_to_window_utils *utils, int x)
+void	check_and_put(t_game *game, char *path,
+	t_put_line_to_window_utils *utils, int x)
 {
-	(*utils).img = mlx_xpm_file_to_image(game->mlx, path, &(*utils).width, &(*utils).height);
+	(*utils).img = mlx_xpm_file_to_image(game->mlx, path,
+			&(*utils).width, &(*utils).height);
 	game->img = (*utils).img;
-	mlx_put_image_to_window(game->mlx, game->win, (*utils).img, (*utils).y, x);
+	mlx_put_image_to_window(game->mlx, game->win,
+		(*utils).img, (*utils).y, x);
 	mlx_destroy_image(game->mlx, (*utils).img);
 }
 
-void check_player_exist(char **map)
+void	check_player_exist(char **map)
 {
 	if (!ft_tabchr(map, 'P'))
 	{
@@ -32,9 +33,10 @@ void check_player_exist(char **map)
 	}
 }
 
-void put_line_to_window(t_game *game, char *line, int *x)
+void	put_line_to_window(t_game *game, char *line, int *x)
 {
-	t_put_line_to_window_utils utils;
+	t_put_line_to_window_utils	utils;
+
 	utils.i = -1;
 	utils.width = 0;
 	utils.y = 0;

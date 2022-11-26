@@ -6,20 +6,20 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 20:56:27 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/25 02:16:39 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/26 21:44:32 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void ft_putchar(char c)
+void	ft_putchar(char c)
 {
 	write(1, &c, 1);
 }
 
-void ft_putstr(char *str)
+void	ft_putstr(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -51,9 +51,9 @@ void	ft_putnbr(int n)
 		ft_putchar(n + '0');
 }
 
-int ft_strcmp(char *s1, char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s1[i] || s2[i])
@@ -66,9 +66,9 @@ int ft_strcmp(char *s1, char *s2)
 	return (0);
 }
 
-int check_file(char *str)
+int	check_file(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])

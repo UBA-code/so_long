@@ -6,18 +6,19 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 23:55:20 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/22 03:28:35 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/26 21:59:03 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int get_lines_len(char *file)
+int	get_lines_len(char *file)
 {
-	int fd = open(file, O_RDONLY);
-	int i;
-	char *line;
+	int		fd;
+	int		i;
+	char	*line;
 
+	fd = open(file, O_RDONLY);
 	line = get_next_line(fd);
 	i = 0;
 	while (line)
@@ -31,12 +32,12 @@ int get_lines_len(char *file)
 	return (i);
 }
 
-char **get_map(char *file)
+char	**get_map(char *file)
 {
-	int fd;
-	char **map;
-	char *line;
-	int i;
+	int		fd;
+	char	**map;
+	char	*line;
+	int		i;
 
 	map = malloc(sizeof(char *) * get_lines_len(file) + 1);
 	fd = open(file, O_RDONLY);
@@ -54,4 +55,17 @@ char **get_map(char *file)
 	free(line);
 	map[i] = 0;
 	return (map);
+}
+
+void	free_tab(char **tab)
+{
+	int	y;
+
+	y = 0;
+	while (tab[y])
+	{
+		free(tab[y]);
+		y++;
+	}
+	free(tab);
 }
