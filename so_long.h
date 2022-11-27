@@ -6,7 +6,7 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 20:46:28 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/26 22:18:12 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/27 00:13:29 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@
 # include "mlx.h"
 # include "fcntl.h"
 # include "stdio.h"
-# include "./1337_get_next_line/get_next_line.h"
+# include "get_next_line.h"
 
-# define FLOOR "./items/floor.xpm"
-# define DOOR_CLOSE "./items/door.xpm"
-# define DOOR_OPEN "./items/door_open.xpm"
+# define FLOOR "./textures/floor.xpm"
+# define DOOR_CLOSE "./textures/door.xpm"
+# define DOOR_OPEN "./textures/door_open.xpm"
 # define DOOR DOOR_CLOSE
-# define COIN "./items/coin.xpm"
-# define PLAYER_LEFT "./items/player_left.xpm"
-# define PLAYER_RIGHT "./items/player_right.xpm"
-# define WALL "./items/wall.xpm"
-# define ENEMY "./items/enemy.xpm"
-# define COIN2 "./items/coin_2.xpm"
+# define COIN "./textures/coin.xpm"
+# define PLAYER_LEFT "./textures/player_left.xpm"
+# define PLAYER_RIGHT "./textures/player_right.xpm"
+# define WALL "./textures/wall.xpm"
+# define ENEMY "./textures/enemy.xpm"
+# define COIN2 "./textures/coin_2.xpm"
 
 typedef struct s_put_line_to_window_utils {
 	int		i;

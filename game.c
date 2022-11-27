@@ -6,7 +6,7 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 15:43:50 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/26 22:19:48 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/27 00:57:45 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,20 @@ void	*get_window_size(void *mlx, char *path)
 		w = get_str_len(line);
 		free(line);
 	}
-	win = mlx_new_window(mlx, w * 32, (h * 32) + 32, "l3ba hhh");
+	win = mlx_new_window(mlx, w * 32, (h * 32) + 32, "./so_long");
 	close(fd);
 	return (win);
 }
 
 int	key_hook(int keycode, t_game *game)
 {
-	if (keycode == 13 || keycode == 126)
+	if (keycode == 126)
 		player_move(game, 1, 0, '0');
-	if (keycode == 1 || keycode == 125)
+	if (keycode == 125)
 		player_move(game, -1, 0, '0');
-	if (keycode == 0 || keycode == 123)
+	if (keycode == 123)
 		player_move(game, 0, 1, 'l');
-	if (keycode == 2 || keycode == 124)
+	if (keycode == 124)
 		player_move(game, 0, -1, 'r');
 	if (keycode == 53)
 	{
