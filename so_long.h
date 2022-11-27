@@ -6,7 +6,7 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 20:46:28 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/27 00:13:29 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/27 01:06:43 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "mlx.h"
 # include "fcntl.h"
-# include "stdio.h"
 # include "get_next_line.h"
 
 # define FLOOR "./textures/floor.xpm"

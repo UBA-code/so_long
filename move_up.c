@@ -6,7 +6,7 @@
 /*   By: ybel-hac <ybel-hac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:46:35 by ybel-hac          #+#    #+#             */
-/*   Updated: 2022/11/27 00:09:43 by ybel-hac         ###   ########.fr       */
+/*   Updated: 2022/11/27 01:13:22 by ybel-hac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,13 @@ void	free_exit(t_game game, char c)
 
 void	ft_put_counter_win(t_game game, int i)
 {
+	char *nb;
+
 	mlx_string_put(game.mlx, game.win, 0, 0,
 		0x001958b9, "Number of moves is : ");
-	mlx_string_put(game.mlx, game.win, 220, 0, 0x001958b9, ft_itoa(i));
+	nb = ft_itoa(i);
+	mlx_string_put(game.mlx, game.win, 220, 0, 0x001958b9, nb);
+	free(nb);
 }
 
 void	check_position(t_game game, int y_move, int x_move, int y)
